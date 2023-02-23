@@ -41,17 +41,25 @@ int main()
 			{ L"DISPATCH_COUNT", dispatch_count_str.c_str() },
 		};
 		HRESULT hr = compiler->Compile(source_blob.Get(), L"Shader.hlsl", L"main", L"cs_6_4", arguments, _countof(arguments), defines, _countof(defines), nullptr, &result);
-		if (SUCCEEDED(hr))
-			result->GetStatus(&hr);
-		bool compile_succeed = SUCCEEDED(hr);
+		if (!SUCCEEDED(hr))
+		{
+			return 0;
+		}
+
+		result->GetStatus(&hr);
+		if (!SUCCEEDED(hr))
+		{
+			printf("Shader compile failed\n\n");
+			return 0;
+		}
+
+		printf("Shader compile succeed\n\n");
+
 		ComPtr<IDxcBlobEncoding> error_blob;
 		if (SUCCEEDED(result->GetErrorBuffer(&error_blob)) && error_blob)
 		{
-			printf("Shader compile %s\n\n", compile_succeed ? "succeed" : "failed");
 			std::string error_message((const char*)error_blob->GetBufferPointer(), error_blob->GetBufferSize());
 			printf("%s", error_message.c_str());
-			if (!compile_succeed)
-				return 0;
 		}
 
 		result->GetResult(&shader_blob);
