@@ -15,6 +15,8 @@ set_source_files_properties(${_shader} PROPERTIES VS_SHADER_TYPE Compute VS_SHAD
 
 get_filename_component(_name "SimpleComputeShader" NAME)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:Console")
+set(VS_STARTUP_PROJECT ${_name})
+
 
 add_executable(${_name} WIN32 ${_files})
 target_compile_definitions(${_name} PRIVATE "UNICODE" "_UNICODE")
