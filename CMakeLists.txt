@@ -4,10 +4,10 @@ project(ComputeShaderPlayground)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-file(GLOB _files "./*")
-list(APPEND _shader ${_files})
-list(APPEND _dlls ${_files})
-list(FILTER _files INCLUDE REGEX "\\.cpp|\\.h")
+file(GLOB src_files "./src/*")
+file(GLOB _shader "./src/shaders/*")
+file(GLOB _dlls "./lib/*")
+list(FILTER src_files INCLUDE REGEX "\\.cpp|\\.h")
 list(FILTER _shader INCLUDE REGEX "\\.hlsl")
 list(FILTER _dlls INCLUDE REGEX "\\.dll")
 
@@ -18,7 +18,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:Console")
 set(VS_STARTUP_PROJECT ${_name})
 
 
-add_executable(${_name} WIN32 ${_files})
+add_executable(${_name} WIN32 ${src_files})
 target_compile_definitions(${_name} PRIVATE "UNICODE" "_UNICODE")
 target_link_libraries(${_name} PRIVATE "d3d12.lib" "dxgi.lib" "d3dcompiler.lib" "dxcompiler.lib")
 

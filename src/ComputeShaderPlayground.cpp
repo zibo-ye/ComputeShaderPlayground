@@ -213,14 +213,14 @@ int main()
 	fence->SetEventOnCompletion(1, handle);
 	WaitForSingleObject(handle, INFINITE);
 
-	//float* data = nullptr;
-	//D3D12_RANGE range = { 0, uav1.mReadbackDesc.Width };
-	//uav1.mReadbackResource->Map(0, &range, (void**)&data);
+	// float* data = nullptr;
+	// D3D12_RANGE range = { 0, uav1.mReadbackDesc.Width };
+	// uav1.mReadbackResource->Map(0, &range, (void**)&data);
 
-	//for (int i = 0; i < uav1.mReadbackDesc.Width / sizeof(float) / 4; i++)
-	//	printf("uav[%d] = %.3f, %.3f, %.3f, %.3f\n", i, data[i * 4 + 0], data[i * 4 + 1], data[i * 4 + 2], data[i * 4 + 3]);
+	// for (int i = 0; i < uav1.mReadbackDesc.Width / sizeof(float) / 4; i++)
+	// 	printf("uav[%d] = %.3f, %.3f, %.3f, %.3f\n", i, data[i * 4 + 0], data[i * 4 + 1], data[i * 4 + 2], data[i * 4 + 3]);
 
-	//uav1.mReadbackResource->Unmap(0, nullptr);
+	// uav1.mReadbackResource->Unmap(0, nullptr);
 
 	return 0;
 }
